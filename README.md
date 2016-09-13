@@ -41,10 +41,11 @@
 // 获取ul
 var ulDom = document.getElementsByTagName("ul");
 
+// 定义绑定事件的方法。主要是处理兼容性
 var addEvent = function( obj, type, fn ) { 
-	if (obj.addEventListener){
+	if (obj.addEventListener){   // 能力检测，检测非ie浏览器
 		obj.addEventListener( type, fn, false );
-	}else if (obj.attachEvent) { 
+	}else if (obj.attachEvent) { // 能力检测，检测ie浏览器
 		obj["e"+type+fn] = fn; 
 		obj.attachEvent( "on"+type, function() { 
 			obj["e"+type+fn](); 
@@ -52,8 +53,8 @@ var addEvent = function( obj, type, fn ) {
 	} 
 };
 
+//给ul 绑定click事件
 addEvent(ulDom[0],"click",function(e){
-	console.log(e.target.tagName);
 	if(e.target.tagName.toLowerCase()=="li"){
 		alert(e.target.textContent);
 	}
@@ -85,6 +86,8 @@ addEvent(ulDom[0],"click",function(e){
 ```	
 // 获取ul
 var $ulDom = $("ul");
+
+//给ul绑定click事件
 $ulDom.on("click","li",function(){
 	alert($(this).html())
 });
